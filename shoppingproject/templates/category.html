@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+    {% if category_key %}
+        {{ category_key.description|truncatewords:155 }}
+    {% else %}
+        Welcome to Fresh items buy from here....
+    {% endif %}
+{% endblock %}
+{% block title %}
+    {% if category_key %}
+        {{ category_key.name }}--Fresh stores
+    {% else %}
+        See our new collections
+    {% endif %}}
+{% endblock %}
+{% block content %}
+    {% if category_key %}
+        <div>
+            <div class="row my_row_class">
+                <div class="mx_auto">
+                <p><a href="{% url 'shopapp:allProdCat' %}"><h1>Our product collection Here</h1></a></p>
+                 </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+    <div class="mx_auto">
+            {% if category_key %}
+        <img class="my_image" src="{{category.image.url}}" alt="{{category.name}}">
+    </div>
+<div>
+    <h1 class="text-center my_title">{{ category_key.name }}</h1>
+    <p class="text-justify">{{ category_key.description }}</p>
+
+</div>
+    {% else %}
+<div>
+    <img class="my_image my_image_padding" src="{% static 'img/banner.png' %}" alt="Our Product" height="300px" width="1256px">
+</div>
+ <br>
+<div>
+
+        <h1 class="text-center my_title">Our Product Collections</h1>
+        <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  </p>
+</div>
+    {% endif %}
+<div class="container">
+    <div class="row mx_auto">
+        {% for product1 in products_key.object_list %}
+        <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
+            <div class="card text-center" style="min-width:18rem;">
+
+                <a href="{{product1.get_url}}"><img class="card-img-top my_image" style="height:200px; width:200px;" src="{{ product1.image.url }}" alt="{{product1.name}}" height="200px" width="200px"></a>
+                   <div class="card-body">
+                        <h4>{{product1.name}}</h4>
+                        <p>{{product1.price}}</p>
+                    </div>
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="mx_auto">
+        {% if products_key.paginator.num_pages > 1 %}
+        <hr>
+        <div class="text-center">
+            {% for pg in products_key.paginator.page_range %}
+            <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products_key.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+    </div>
+</div>
+{% endblock %}
