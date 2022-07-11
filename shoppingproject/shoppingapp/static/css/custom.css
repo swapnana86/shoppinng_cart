@@ -18,17 +18,6 @@ body{
     text-transform:uppercase;
 
 }
-.my_footer{
-    background-color:#FFC0CB;;
-    height:160px;
-    width:1256px;
-    position:fixed;
-
-}
-.my_footer p{
-    padding-top:20px;
-    font-size:14px;
-}
 
 /*** Category ***/
 
@@ -93,9 +82,14 @@ body{
     padding-top:20px;
  }
 
-/*** Footer ***/
+/*** Footer
 .footer{
   position:fixed;
+
+}***/
+.my_footer{
+    background-color:#FFC0CB;
+    height:50px;
 }
 
 /*** cart Page ***/
